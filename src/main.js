@@ -6,8 +6,7 @@
  */
 function calculateSimpleRevenue(purchase, _product) {
     // @TODO: Расчет выручки от операции
-    // purchase — это одна из записей в поле items из чека в data.purchase_records
-    // _product — это продукт из коллекции data.products
+
     const { discount , sale_price, quantity } = purchase;
     const revenue = sale_price * quantity * (1 - (discount / 100)); //Вообще хуй пойми, что мы тут делаем
     return revenue;
@@ -22,15 +21,16 @@ function calculateSimpleRevenue(purchase, _product) {
  */
 function calculateBonusByProfit(index, total, seller) {
     // @TODO: Расчет бонуса от позиции в рейтинге
+
     const { profit } = seller;
     if (index === 0) {
-        return 1.15;
+        return profit * 0.15;
     } else if (index === 1 || index === 2) {
-        return 1.1;
+        return profit * 0.1;
     } else if (index === total - 1) {
         return 0;
     } else {
-        return 1.05;
+        return profit * 0.05;
     };
 }
 
@@ -42,18 +42,23 @@ function calculateBonusByProfit(index, total, seller) {
  */
 function analyzeSalesData(data, options) {
     // @TODO: Проверка входных данных
+
     if (!options 
         || !Array.isArray(data.sellers)
         || data.sellers === 0
     ) {
         throw new Error('Некорректные данные');
     };
-    const { calculateRevenue, calculateBonus } = options;
+
     // @TODO: Проверка наличия опций
-    if (!typeof options === "object" || !typeof calculateBonus === "function" || !typeof calculateRevenue === "function") {
+    
+    const { calculateRevenue, calculateBonus } = options;
+
+    if (!calculateBonus || !calculateRevenue) {
         throw new Error('Чего-то не хватает');
     };
     // @TODO: Подготовка промежуточных данных для сбора статистики
+
     const sellerStats = data.sellers.map(seller => ({
         id: seller.id,
         name: `${seller.first_name} ${seller.last_name}`,
