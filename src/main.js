@@ -93,10 +93,12 @@ function analyzeSalesData(data, options) {
                 seller.products_sold[item.sku] = 0;
             };
 
-            seller.products_sold[item.sku] += 1;
+            seller.products_sold[item.sku] += item.quantity;
 
         });
     });
+
+    // console.log()
     // @TODO: Сортировка продавцов по прибыли
 
     sellerStats.sort((a, b) => {
@@ -115,7 +117,7 @@ function analyzeSalesData(data, options) {
         }).slice(0, 10);
     });
 
-    //console.log(sellerStats);
+    // console.log(sellerStats);
 
     // @TODO: Подготовка итоговой коллекции с нужными полями
 
