@@ -108,7 +108,7 @@ function analyzeSalesData(data, options) {
     sellerStats.forEach((seller, index) => {
         seller.bonus = calculateBonusByProfit(index, sellerStats.length, seller);
         seller.top_products = Object.entries(seller.products_sold).sort((a, b) => {
-        return b.quantity - a.quantity;
+        return b[1] - a[1];
         }).slice(0, 10);
     });
 
