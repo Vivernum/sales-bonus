@@ -107,13 +107,12 @@ function analyzeSalesData(data, options) {
 
     sellerStats.forEach((seller, index) => {
         seller.bonus = calculateBonusByProfit(index, sellerStats.length, seller);
-        seller.top_products = Object.entries(seller.products_sold).map(item => ({
-            sku: item[0],
-            quantity: item[1]
-        })).sort((a, b) => {
+        seller.top_products = Object.entries(seller.products_sold).sort((a, b) => {
         return b.quantity - a.quantity;
         }).slice(0, 10);
     });
+
+    // console.log(sellerStats);
 
     // @TODO: Подготовка итоговой коллекции с нужными полями
 
