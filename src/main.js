@@ -115,7 +115,7 @@ function analyzeSalesData(data, options) {
         }).slice(0, 10);
     });
 
-    // console.log(sellerStats);
+    //console.log(sellerStats);
 
     // @TODO: Подготовка итоговой коллекции с нужными полями
 
